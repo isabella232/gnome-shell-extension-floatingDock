@@ -22,6 +22,8 @@ var gsettings = null;
 
 class FloatDock {
     constructor() {
+        Meta.disable_unredirect_for_display(global.display);
+
         this._gsettings = ExtensionUtils.getSettings(SCHEMA);
         gsettings = this._gsettings;
 
