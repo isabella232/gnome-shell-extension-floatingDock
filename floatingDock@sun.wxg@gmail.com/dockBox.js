@@ -139,6 +139,17 @@ var DockBox = GObject.registerClass({
 
         this._aroundButtonManager = new AroundButtonManager(this.iconSize, this._mainButton);
 
+        global.display.connect('restacked', () => {
+            log('restacked');
+            this.show();
+            this._mainButton.show();
+        });
+        global.display.connect('in-fullscreen-changed', () => {
+            log('in-fullscreen-changed');
+            this.show();
+            this._mainButton.show();
+        });
+
         Main.layoutManager.addChrome(this._mainButton, { trackFullscreen: true });
         Main.layoutManager.addChrome(this, { trackFullscreen: true });
 
