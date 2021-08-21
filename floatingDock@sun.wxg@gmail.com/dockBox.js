@@ -237,7 +237,16 @@ var DockBox = GObject.registerClass({
 
     _addCustomerApp() {
         for (let i in this._userApps) {
-            let app = this._appSystem.lookup_app(this._userApps[i]);
+            let appId = this._userApps[i];
+            if (!appId) {
+                continue;
+            }
+
+            let app = this._appSystem.lookup_app(appId);
+            if (!app) {
+                continue;
+            }
+
             let item = new ItemContainer(app, this._vimMode, this._itemNumber++, this.iconSize, this._indicator);
             item.button.connect('activate-window', this._activateWindow.bind(this));
             item.button.connect('in-preview', (button, state) => {
